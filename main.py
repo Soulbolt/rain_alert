@@ -1,8 +1,9 @@
 import requests
-from twilio.rest import Client # requires a twilio account to use this service(require account Id + auth token)
+# from twilio.rest import Client # require a twilio account to use this service(require account Id + auth token)
+import os
 
 # We can add our main.py file to have automated through pythonanywhere.com
-api_key = "c3786c1934232636bffda24c8eea4332"
+api_key = os.environ.get['OWM_API_KEY']
 OWM_Endpoint = "https://api.openweathermap.org/data/2.5/forecast?"
 account_sid = "id goes here"
 auth_token = "your_auth_token"
