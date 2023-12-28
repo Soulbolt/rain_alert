@@ -1,7 +1,12 @@
 import requests
+from twilio.rest import Client # requires a twilio account to use this service(require account Id + auth token)
 
+# We can add our main.py file to have automated through pythonanywhere.com
 api_key = "c3786c1934232636bffda24c8eea4332"
 OWM_Endpoint = "https://api.openweathermap.org/data/2.5/forecast?"
+account_sid = "id goes here"
+auth_token = "your_auth_token"
+client = Client(account_sid, auth_token)
 lat = 33.306160
 lng = -111.841248
 
@@ -27,6 +32,11 @@ for hour_data in weather_data["list"]:
         will_rain = True
 
 if will_rain:
-    print("Bring an umbrella")
-else:
-    print("I guess is sunny today?")
+    message = client.messages \
+        .create(
+            body="It's going to rain today. Remember to bring an umbrella",
+            from="twilio_provided_number",
+            to="your_phone_number",
+        )
+
+print(message.status)
